@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "method": "DEMambaNet",
+  "paper_reference_note": "Explicit mapping to Table 2 in the current checklist; not newest runs, not M5 substitutions. Metrics are provenance checks only, never sample/checkpoint optimization.",
+  "protocol": {
+    "precision": "fp32",
+    "head": "mask",
+    "activation": "sigmoid",
+    "threshold": 0.5,
+    "comparison": ">",
+    "tta": false,
+    "sliding_window": false,
+    "postprocess": false,
+    "preprocessing": "RGB/Pillow-bilinear-letterbox-zero/ImageNet",
+    "evaluation_grid": "entire model-input grid INCLUDING letterbox padding"
+  },
+  "datasets": {
+    "DeepCrack": {
+      "config": "runs/pilot/auto_protocol_v2/C40_DPSM80_DeepCrack_AUTO_PROTOCOL_V2/20260827-160052/config.yaml",
+      "checkpoint": "runs/pilot/auto_protocol_v2/C40_DPSM80_DeepCrack_AUTO_PROTOCOL_V2/20260827-160052/best_structural_score.pth",
+      "log": "runs/pilot/auto_protocol_v2/C40_DPSM80_DeepCrack_AUTO_PROTOCOL_V2/20260827-160052/train.log",
+      "training_seed": 42,
+      "img_size": [
+        384,
+        544
+      ],
+      "weight_type": "ema",
+      "paper_metrics": {
+        "mIoU": 0.932,
+        "F1": 0.93
+      },
+      "paper_reference": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md",
+      "threshold_source": "metrics/metrics.py:SegmentationMetric default primary_threshold=0.5 in train.py:validate; not a test threshold search",
+      "precision_source": "train.py:validate @torch.no_grad, no autocast; train.amp does NOT set test precision"
+    },
+    "CamCrack789": {
+      "config": "runs/pilot/auto_protocol_v2/C40_DPSM80_CamCrack789_AUTO_PROTOCOL_V2/20260827-073748/config.yaml",
+      "checkpoint": "runs/pilot/auto_protocol_v2/C40_DPSM80_CamCrack789_AUTO_PROTOCOL_V2/20260827-073748/best_structural_score.pth",
+      "log": "runs/pilot/auto_protocol_v2/C40_DPSM80_CamCrack789_AUTO_PROTOCOL_V2/20260827-073748/train.log",
+      "training_seed": 42,
+      "img_size": [
+        480,
+        640
+      ],
+      "weight_type": "ema",
+      "paper_metrics": {
+        "mIoU": 0.8789,
+        "F1": 0.8672
+      },
+      "paper_reference": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md",
+      "threshold_source": "metrics/metrics.py:SegmentationMetric default primary_threshold=0.5 in train.py:validate; not a test threshold search",
+      "precision_source": "train.py:validate @torch.no_grad, no autocast; train.amp does NOT set test precision"
+    },
+    "CrackMap": {
+      "config": "runs/pilot/auto_protocol_v2/C40_DPSM80_CrackMap_AUTO_PROTOCOL_V2/20260827-072825/config.yaml",
+      "checkpoint": "runs/pilot/auto_protocol_v2/C40_DPSM80_CrackMap_AUTO_PROTOCOL_V2/20260827-072825/best_structural_score.pth",
+      "log": "runs/pilot/auto_protocol_v2/C40_DPSM80_CrackMap_AUTO_PROTOCOL_V2/20260827-072825/train.log",
+      "training_seed": 42,
+      "img_size": [
+        256,
+        256
+      ],
+      "weight_type": "ema",
+      "paper_metrics": {
+        "mIoU": 0.8231,
+        "F1": 0.7949
+      },
+      "paper_reference": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md",
+      "threshold_source": "metrics/metrics.py:SegmentationMetric default primary_threshold=0.5 in train.py:validate; not a test threshold search",
+      "precision_source": "train.py:validate @torch.no_grad, no autocast; train.amp does NOT set test precision"
+    },
+    "Crack500": {
+      "config": "runs/pilot/auto_protocol_v2/C40_DPSM80_Crack500_AUTO_PROTOCOL_V2/20260827-090225/config.yaml",
+      "checkpoint": "runs/pilot/auto_protocol_v2/C40_DPSM80_Crack500_AUTO_PROTOCOL_V2/20260827-090225/best_structural_score.pth",
+      "log": "runs/pilot/auto_protocol_v2/C40_DPSM80_Crack500_AUTO_PROTOCOL_V2/20260827-090225/train.log",
+      "training_seed": 42,
+      "img_size": [
+        352,
+        640
+      ],
+      "weight_type": "ema",
+      "paper_metrics": {
+        "mIoU": 0.82,
+        "F1": 0.7982
+      },
+      "paper_reference": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md",
+      "threshold_source": "metrics/metrics.py:SegmentationMetric default primary_threshold=0.5 in train.py:validate; not a test threshold search",
+      "precision_source": "train.py:validate @torch.no_grad, no autocast; train.amp does NOT set test precision"
+    },
+    "CFD": {
+      "config": "runs/pilot/auto_protocol_v2/C40_DPSM80_CFD_AUTO_PROTOCOL_V2/20260827-071420/config.yaml",
+      "checkpoint": "runs/pilot/auto_protocol_v2/C40_DPSM80_CFD_AUTO_PROTOCOL_V2/20260827-071420/best_structural_score.pth",
+      "log": "runs/pilot/auto_protocol_v2/C40_DPSM80_CFD_AUTO_PROTOCOL_V2/20260827-071420/train.log",
+      "training_seed": 42,
+      "img_size": [
+        320,
+        480
+      ],
+      "weight_type": "ema",
+      "paper_metrics": {
+        "mIoU": 0.7007,
+        "F1": 0.5916
+      },
+      "paper_reference": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md",
+      "threshold_source": "metrics/metrics.py:SegmentationMetric default primary_threshold=0.5 in train.py:validate; not a test threshold search",
+      "precision_source": "train.py:validate @torch.no_grad, no autocast; train.amp does NOT set test precision"
+    },
+    "TUT": {
+      "config": "runs/pilot/auto_protocol_v2/C40_DPSM80_TUT_AUTO_PROTOCOL_V2/20260827-082226/config.yaml",
+      "checkpoint": "runs/pilot/auto_protocol_v2/C40_DPSM80_TUT_AUTO_PROTOCOL_V2/20260827-082226/best_structural_score.pth",
+      "log": "runs/pilot/auto_protocol_v2/C40_DPSM80_TUT_AUTO_PROTOCOL_V2/20260827-082226/train.log",
+      "training_seed": 42,
+      "img_size": [
+        640,
+        640
+      ],
+      "weight_type": "ema",
+      "paper_metrics": {
+        "mIoU": 0.8566,
+        "F1": 0.8388
+      },
+      "paper_reference": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md",
+      "threshold_source": "metrics/metrics.py:SegmentationMetric default primary_threshold=0.5 in train.py:validate; not a test threshold search",
+      "precision_source": "train.py:validate @torch.no_grad, no autocast; train.amp does NOT set test precision"
+    }
+  }
+}

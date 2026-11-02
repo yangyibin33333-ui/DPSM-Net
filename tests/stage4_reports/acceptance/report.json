@@ -1,0 +1,1096 @@
+{
+  "torch": "2.14.1+cpu",
+  "cuda_available": false,
+  "device": "cpu",
+  "status": "PASS",
+  "untouched_hashes": {
+    "train.py": "d7da1d9452b3e7caad4b3da6bbeb619f1914d9909d8e0455900fb2eae90edacc",
+    "test.py": "47f037583543c5567357ca227fe830b928bb528db616f216f987f44527fa85dc",
+    "models\\mamba_blocks.py": "8cad8821c1edf1c07eac64eeb9e7ed4e480da2045727dda8bb22e542eef7c1a6",
+    "losses\\confidence_balanced_distillation.py": "5624728c6595fe02c376ba89df801eca003b15bd8315a6d78e57a042c31b2b09",
+    "losses\\loss.py": "ae61371d03b5a267d3fccdea77e6e5bd496020978fec69870a3ccb50ca95fcea",
+    "losses\\__init__.py": "90ca862d65809d2c4954812ec791cba2c14c583e310f167918864244374f3da3",
+    "metrics\\metrics.py": "fe370dcb25d14589ac8862cb97149d5d3b5e4384d8733d67666bdd419ad7ed51",
+    "metrics\\__init__.py": "e4027cdfd7372273af9fa7d27ee973a54301b694a335fc050cba6485fab2128e"
+  },
+  "config_diffs": {
+    "T0_vs_T1": [
+      [
+        "model.stage4_variant",
+        "local_only",
+        "<absent>"
+      ],
+      [
+        "model.transformer_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.use_direction_partitioned_shared_mamba",
+        "<absent>",
+        false
+      ],
+      [
+        "model.use_topology_matched_no_dpsm_stage4",
+        "<absent>",
+        true
+      ],
+      [
+        "model.use_transformer",
+        false,
+        true
+      ],
+      [
+        "save.save_dir",
+        "runs/paper/stage4_compact_ablation_strict_v2/crack500/T0_LocalOnly_StrictV2",
+        "runs/paper/dependency_aware_ablation_strict_v2/crack500/M1_FrameworkOn_DPSMOff_StructSupOff"
+      ]
+    ],
+    "T0_vs_T2": [
+      [
+        "model.mamba_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.stage4_variant",
+        "local_only",
+        "local_dpsm80"
+      ],
+      [
+        "save.save_dir",
+        "runs/paper/stage4_compact_ablation_strict_v2/crack500/T0_LocalOnly_StrictV2",
+        "runs/paper/stage4_compact_ablation_strict_v2/crack500/T2_LocalDPSM80_StrictV2"
+      ]
+    ],
+    "T0_vs_T3": [
+      [
+        "model.mamba_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.stage4_variant",
+        "local_only",
+        "<absent>"
+      ],
+      [
+        "model.transformer_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.use_direction_partitioned_shared_mamba",
+        "<absent>",
+        true
+      ],
+      [
+        "model.use_topology_matched_no_dpsm_stage4",
+        "<absent>",
+        false
+      ],
+      [
+        "model.use_transformer",
+        false,
+        true
+      ],
+      [
+        "save.save_dir",
+        "runs/paper/stage4_compact_ablation_strict_v2/crack500/T0_LocalOnly_StrictV2",
+        "runs/paper/dependency_aware_ablation_strict_v2/crack500/M3_FrameworkOn_DPSMOn_StructSupOff"
+      ]
+    ],
+    "T1_vs_T2": [
+      [
+        "model.mamba_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.stage4_variant",
+        "<absent>",
+        "local_dpsm80"
+      ],
+      [
+        "model.transformer_stages",
+        [
+          4
+        ],
+        []
+      ],
+      [
+        "model.use_direction_partitioned_shared_mamba",
+        false,
+        "<absent>"
+      ],
+      [
+        "model.use_topology_matched_no_dpsm_stage4",
+        true,
+        "<absent>"
+      ],
+      [
+        "model.use_transformer",
+        true,
+        false
+      ],
+      [
+        "save.save_dir",
+        "runs/paper/dependency_aware_ablation_strict_v2/crack500/M1_FrameworkOn_DPSMOff_StructSupOff",
+        "runs/paper/stage4_compact_ablation_strict_v2/crack500/T2_LocalDPSM80_StrictV2"
+      ]
+    ],
+    "T1_vs_T3": [
+      [
+        "model.mamba_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.use_direction_partitioned_shared_mamba",
+        false,
+        true
+      ],
+      [
+        "model.use_topology_matched_no_dpsm_stage4",
+        true,
+        false
+      ],
+      [
+        "save.save_dir",
+        "runs/paper/dependency_aware_ablation_strict_v2/crack500/M1_FrameworkOn_DPSMOff_StructSupOff",
+        "runs/paper/dependency_aware_ablation_strict_v2/crack500/M3_FrameworkOn_DPSMOn_StructSupOff"
+      ]
+    ],
+    "T2_vs_T3": [
+      [
+        "model.stage4_variant",
+        "local_dpsm80",
+        "<absent>"
+      ],
+      [
+        "model.transformer_stages",
+        [],
+        [
+          4
+        ]
+      ],
+      [
+        "model.use_direction_partitioned_shared_mamba",
+        "<absent>",
+        true
+      ],
+      [
+        "model.use_topology_matched_no_dpsm_stage4",
+        "<absent>",
+        false
+      ],
+      [
+        "model.use_transformer",
+        false,
+        true
+      ],
+      [
+        "save.save_dir",
+        "runs/paper/stage4_compact_ablation_strict_v2/crack500/T2_LocalDPSM80_StrictV2",
+        "runs/paper/dependency_aware_ablation_strict_v2/crack500/M3_FrameworkOn_DPSMOn_StructSupOff"
+      ]
+    ]
+  },
+  "historical_comparisons": [
+    {
+      "tag": "T1",
+      "seed": 42,
+      "diffs": [],
+      "budgets": {
+        "selected_img_size": [
+          352,
+          640
+        ],
+        "effective_batch_size": 8,
+        "target_updates": 18816,
+        "resolved_epochs": 64,
+        "scnp_warmup_updates": 941,
+        "bpcm_start_update": 5645,
+        "bpcm_ramp_updates": 3763,
+        "resolved_validation_interval_updates": 400,
+        "min_early_stop_update": 10349,
+        "patience_updates": 2823
+      }
+    },
+    {
+      "tag": "T1",
+      "seed": 123,
+      "diffs": [],
+      "budgets": {
+        "selected_img_size": [
+          352,
+          640
+        ],
+        "effective_batch_size": 8,
+        "target_updates": 18816,
+        "resolved_epochs": 64,
+        "scnp_warmup_updates": 941,
+        "bpcm_start_update": 5645,
+        "bpcm_ramp_updates": 3763,
+        "resolved_validation_interval_updates": 400,
+        "min_early_stop_update": 10349,
+        "patience_updates": 2823
+      }
+    },
+    {
+      "tag": "T1",
+      "seed": 3407,
+      "diffs": [],
+      "budgets": {
+        "selected_img_size": [
+          352,
+          640
+        ],
+        "effective_batch_size": 8,
+        "target_updates": 18816,
+        "resolved_epochs": 64,
+        "scnp_warmup_updates": 941,
+        "bpcm_start_update": 5645,
+        "bpcm_ramp_updates": 3763,
+        "resolved_validation_interval_updates": 400,
+        "min_early_stop_update": 10349,
+        "patience_updates": 2823
+      }
+    },
+    {
+      "tag": "T3",
+      "seed": 42,
+      "diffs": [],
+      "budgets": {
+        "selected_img_size": [
+          352,
+          640
+        ],
+        "effective_batch_size": 8,
+        "target_updates": 18816,
+        "resolved_epochs": 64,
+        "scnp_warmup_updates": 941,
+        "bpcm_start_update": 5645,
+        "bpcm_ramp_updates": 3763,
+        "resolved_validation_interval_updates": 400,
+        "min_early_stop_update": 10349,
+        "patience_updates": 2823
+      }
+    },
+    {
+      "tag": "T3",
+      "seed": 123,
+      "diffs": [],
+      "budgets": {
+        "selected_img_size": [
+          352,
+          640
+        ],
+        "effective_batch_size": 8,
+        "target_updates": 18816,
+        "resolved_epochs": 64,
+        "scnp_warmup_updates": 941,
+        "bpcm_start_update": 5645,
+        "bpcm_ramp_updates": 3763,
+        "resolved_validation_interval_updates": 400,
+        "min_early_stop_update": 10349,
+        "patience_updates": 2823
+      }
+    },
+    {
+      "tag": "T3",
+      "seed": 3407,
+      "diffs": [],
+      "budgets": {
+        "selected_img_size": [
+          352,
+          640
+        ],
+        "effective_batch_size": 8,
+        "target_updates": 18816,
+        "resolved_epochs": 64,
+        "scnp_warmup_updates": 941,
+        "bpcm_start_update": 5645,
+        "bpcm_ramp_updates": 3763,
+        "resolved_validation_interval_updates": 400,
+        "min_early_stop_update": 10349,
+        "patience_updates": 2823
+      }
+    }
+  ],
+  "models": {
+    "T0": {
+      "class": "Stage4LocalOnly",
+      "params_actual_backend": 1681107,
+      "backends": {},
+      "fuse": [
+        320,
+        320
+      ],
+      "stage4_modules": {
+        "": "Stage4LocalOnly",
+        "local": "Sequential",
+        "local.0": "DWConvBlock",
+        "local.0.block": "Sequential",
+        "local.0.block.0": "ConvBNAct",
+        "local.0.block.0.block": "Sequential",
+        "local.0.block.0.block.0": "Conv2d",
+        "local.0.block.0.block.1": "BatchNorm2d",
+        "local.0.block.0.block.2": "GELU",
+        "local.0.block.1": "ConvBNAct",
+        "local.0.block.1.block": "Sequential",
+        "local.0.block.1.block.0": "Conv2d",
+        "local.0.block.1.block.1": "BatchNorm2d",
+        "local.0.block.1.block.2": "GELU",
+        "local.1": "StripConvBlock",
+        "local.1.horizontal": "Conv2d",
+        "local.1.vertical": "Conv2d",
+        "local.1.mix": "ConvBNAct",
+        "local.1.mix.block": "Sequential",
+        "local.1.mix.block.0": "Conv2d",
+        "local.1.mix.block.1": "BatchNorm2d",
+        "local.1.mix.block.2": "GELU",
+        "fuse": "ConvBNAct",
+        "fuse.block": "Sequential",
+        "fuse.block.0": "Conv2d",
+        "fuse.block.1": "BatchNorm2d",
+        "fuse.block.2": "GELU",
+        "refine": "DWConvBlock",
+        "refine.block": "Sequential",
+        "refine.block.0": "ConvBNAct",
+        "refine.block.0.block": "Sequential",
+        "refine.block.0.block.0": "Conv2d",
+        "refine.block.0.block.1": "BatchNorm2d",
+        "refine.block.0.block.2": "GELU",
+        "refine.block.1": "ConvBNAct",
+        "refine.block.1.block": "Sequential",
+        "refine.block.1.block.0": "Conv2d",
+        "refine.block.1.block.1": "BatchNorm2d",
+        "refine.block.1.block.2": "GELU"
+      },
+      "forward_backward": [
+        {
+          "input": [
+            1,
+            3,
+            352,
+            640
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "edge": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "reliability": [
+              1,
+              1,
+              352,
+              640
+            ]
+          },
+          "packed_core_inputs": [],
+          "all_gradients_finite": true
+        },
+        {
+          "input": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "edge": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "reliability": [
+              1,
+              1,
+              512,
+              512
+            ]
+          },
+          "packed_core_inputs": [],
+          "all_gradients_finite": true
+        }
+      ],
+      "flops": [
+        {
+          "input": [
+            1,
+            3,
+            352,
+            640
+          ],
+          "fvcore_counted": 19954401280.0,
+          "unsupported": {
+            "aten::mean": 1,
+            "aten::square": 2,
+            "aten::add": 24,
+            "aten::sqrt": 1,
+            "aten::amax": 1,
+            "aten::clamp_min": 1,
+            "aten::div": 1,
+            "aten::pixel_unshuffle": 1,
+            "aten::gelu": 33,
+            "aten::sigmoid": 1,
+            "aten::mul": 1,
+            "aten::pixel_shuffle": 4
+          },
+          "status": "fvcore count; unsupported ops disclosed"
+        },
+        {
+          "input": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "fvcore_counted": 23219666944.0,
+          "unsupported": {
+            "aten::mean": 1,
+            "aten::square": 2,
+            "aten::add": 24,
+            "aten::sqrt": 1,
+            "aten::amax": 1,
+            "aten::clamp_min": 1,
+            "aten::div": 1,
+            "aten::pixel_unshuffle": 1,
+            "aten::gelu": 33,
+            "aten::sigmoid": 1,
+            "aten::mul": 1,
+            "aten::pixel_shuffle": 4
+          },
+          "status": "fvcore count; unsupported ops disclosed"
+        }
+      ],
+      "formal_params_from_checkpoint_schema": 1681107
+    },
+    "T1": {
+      "class": "NoDPSMTopoBlock",
+      "params_actual_backend": 2605267,
+      "backends": {},
+      "fuse": [
+        640,
+        320
+      ],
+      "stage4_modules": {
+        "": "NoDPSMTopoBlock",
+        "local": "Sequential",
+        "local.0": "DWConvBlock",
+        "local.0.block": "Sequential",
+        "local.0.block.0": "ConvBNAct",
+        "local.0.block.0.block": "Sequential",
+        "local.0.block.0.block.0": "Conv2d",
+        "local.0.block.0.block.1": "BatchNorm2d",
+        "local.0.block.0.block.2": "GELU",
+        "local.0.block.1": "ConvBNAct",
+        "local.0.block.1.block": "Sequential",
+        "local.0.block.1.block.0": "Conv2d",
+        "local.0.block.1.block.1": "BatchNorm2d",
+        "local.0.block.1.block.2": "GELU",
+        "local.1": "StripConvBlock",
+        "local.1.horizontal": "Conv2d",
+        "local.1.vertical": "Conv2d",
+        "local.1.mix": "ConvBNAct",
+        "local.1.mix.block": "Sequential",
+        "local.1.mix.block.0": "Conv2d",
+        "local.1.mix.block.1": "BatchNorm2d",
+        "local.1.mix.block.2": "GELU",
+        "global_branch": "TransformerGlobalBlock",
+        "global_branch.attn": "LightweightSelfAttention",
+        "global_branch.attn.norm": "GroupNorm",
+        "global_branch.attn.qkv": "Conv2d",
+        "global_branch.attn.proj": "Conv2d",
+        "global_branch.norm": "GroupNorm",
+        "global_branch.mlp": "Sequential",
+        "global_branch.mlp.0": "Conv2d",
+        "global_branch.mlp.1": "GELU",
+        "global_branch.mlp.2": "Conv2d",
+        "fuse": "ConvBNAct",
+        "fuse.block": "Sequential",
+        "fuse.block.0": "Conv2d",
+        "fuse.block.1": "BatchNorm2d",
+        "fuse.block.2": "GELU",
+        "refine": "DWConvBlock",
+        "refine.block": "Sequential",
+        "refine.block.0": "ConvBNAct",
+        "refine.block.0.block": "Sequential",
+        "refine.block.0.block.0": "Conv2d",
+        "refine.block.0.block.1": "BatchNorm2d",
+        "refine.block.0.block.2": "GELU",
+        "refine.block.1": "ConvBNAct",
+        "refine.block.1.block": "Sequential",
+        "refine.block.1.block.0": "Conv2d",
+        "refine.block.1.block.1": "BatchNorm2d",
+        "refine.block.1.block.2": "GELU"
+      },
+      "forward_backward": [
+        {
+          "input": [
+            1,
+            3,
+            352,
+            640
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "edge": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "reliability": [
+              1,
+              1,
+              352,
+              640
+            ]
+          },
+          "packed_core_inputs": [],
+          "all_gradients_finite": true
+        },
+        {
+          "input": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "edge": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "reliability": [
+              1,
+              1,
+              512,
+              512
+            ]
+          },
+          "packed_core_inputs": [],
+          "all_gradients_finite": true
+        }
+      ],
+      "checkpoint_schema": {
+        "path": "./runs/paper/dependency_aware_ablation_strict_v2/crack500/M1_FrameworkOn_DPSMOff_StructSupOff/20260830-174155/best_structural_score.pth",
+        "non_backend_keys_shapes": "PASS",
+        "full_schema_equal": true
+      },
+      "formal_params_from_checkpoint_schema": 2605267
+    },
+    "T2": {
+      "class": "Stage4LocalDPSM80",
+      "params_actual_backend": 2260871,
+      "backends": {
+        "stage4": [
+          "fallback"
+        ]
+      },
+      "fuse": [
+        640,
+        320
+      ],
+      "stage4_modules": {
+        "": "Stage4LocalDPSM80",
+        "local": "Sequential",
+        "local.0": "DWConvBlock",
+        "local.0.block": "Sequential",
+        "local.0.block.0": "ConvBNAct",
+        "local.0.block.0.block": "Sequential",
+        "local.0.block.0.block.0": "Conv2d",
+        "local.0.block.0.block.1": "BatchNorm2d",
+        "local.0.block.0.block.2": "GELU",
+        "local.0.block.1": "ConvBNAct",
+        "local.0.block.1.block": "Sequential",
+        "local.0.block.1.block.0": "Conv2d",
+        "local.0.block.1.block.1": "BatchNorm2d",
+        "local.0.block.1.block.2": "GELU",
+        "local.1": "StripConvBlock",
+        "local.1.horizontal": "Conv2d",
+        "local.1.vertical": "Conv2d",
+        "local.1.mix": "ConvBNAct",
+        "local.1.mix.block": "Sequential",
+        "local.1.mix.block.0": "Conv2d",
+        "local.1.mix.block.1": "BatchNorm2d",
+        "local.1.mix.block.2": "GELU",
+        "route_mamba": "DirectionPartitionedSharedMamba",
+        "route_mamba.route_head": "Sequential",
+        "route_mamba.route_head.0": "Conv2d",
+        "route_mamba.route_head.1": "BatchNorm2d",
+        "route_mamba.route_head.2": "GELU",
+        "route_mamba.route_head.3": "Conv2d",
+        "route_mamba.pre_mix": "Sequential",
+        "route_mamba.pre_mix.0": "Conv2d",
+        "route_mamba.pre_mix.1": "BatchNorm2d",
+        "route_mamba.pre_mix.2": "GELU",
+        "route_mamba.scans": "ModuleDict",
+        "route_mamba.scans.horizontal": "DirectionalGridPermutation",
+        "route_mamba.scans.vertical": "DirectionalGridPermutation",
+        "route_mamba.scans.diagonal": "DirectionalGridPermutation",
+        "route_mamba.scans.anti_diagonal": "DirectionalGridPermutation",
+        "route_mamba.shared_mamba": "SequenceMambaCore",
+        "route_mamba.shared_mamba.norm": "LayerNorm",
+        "route_mamba.shared_mamba.core": "_FallbackSequenceBlock",
+        "route_mamba.shared_mamba.core.in_proj": "Linear",
+        "route_mamba.shared_mamba.core.dwconv": "Conv1d",
+        "route_mamba.shared_mamba.core.out_proj": "Linear",
+        "route_mamba.shared_mamba.core.act": "SiLU",
+        "route_mamba.shared_mamba.out_norm": "LayerNorm",
+        "route_mamba.output_mix": "Sequential",
+        "route_mamba.output_mix.0": "Conv2d",
+        "route_mamba.output_mix.1": "BatchNorm2d",
+        "route_mamba.output_mix.2": "GELU",
+        "fuse": "ConvBNAct",
+        "fuse.block": "Sequential",
+        "fuse.block.0": "Conv2d",
+        "fuse.block.1": "BatchNorm2d",
+        "fuse.block.2": "GELU",
+        "refine": "DWConvBlock",
+        "refine.block": "Sequential",
+        "refine.block.0": "ConvBNAct",
+        "refine.block.0.block": "Sequential",
+        "refine.block.0.block.0": "Conv2d",
+        "refine.block.0.block.1": "BatchNorm2d",
+        "refine.block.0.block.2": "GELU",
+        "refine.block.1": "ConvBNAct",
+        "refine.block.1.block": "Sequential",
+        "refine.block.1.block.0": "Conv2d",
+        "refine.block.1.block.1": "BatchNorm2d",
+        "refine.block.1.block.2": "GELU"
+      },
+      "forward_backward": [
+        {
+          "input": [
+            1,
+            3,
+            352,
+            640
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "edge": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "reliability": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "route_s4": [
+              1,
+              4,
+              44,
+              80
+            ]
+          },
+          "packed_core_inputs": [
+            [
+              4,
+              3520,
+              80
+            ]
+          ],
+          "all_gradients_finite": true
+        },
+        {
+          "input": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "edge": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "reliability": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "route_s4": [
+              1,
+              4,
+              64,
+              64
+            ]
+          },
+          "packed_core_inputs": [
+            [
+              4,
+              4096,
+              80
+            ]
+          ],
+          "all_gradients_finite": true
+        }
+      ],
+      "flops": [
+        {
+          "input": [
+            1,
+            3,
+            352,
+            640
+          ],
+          "fvcore_counted": 22420654080.0,
+          "unsupported": {
+            "aten::mean": 1,
+            "aten::square": 2,
+            "aten::add": 25,
+            "aten::sqrt": 1,
+            "aten::amax": 1,
+            "aten::clamp_min": 1,
+            "aten::div": 1,
+            "aten::pixel_unshuffle": 1,
+            "aten::gelu": 36,
+            "aten::sigmoid": 2,
+            "aten::mul": 15,
+            "aten::pixel_shuffle": 4,
+            "aten::softmax": 1,
+            "aten::silu": 1,
+            "aten::empty_like": 4,
+            "aten::scatter_": 4
+          },
+          "status": "partial count; fallback diagnostic only"
+        },
+        {
+          "input": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "fvcore_counted": 26089488384.0,
+          "unsupported": {
+            "aten::mean": 1,
+            "aten::square": 2,
+            "aten::add": 25,
+            "aten::sqrt": 1,
+            "aten::amax": 1,
+            "aten::clamp_min": 1,
+            "aten::div": 1,
+            "aten::pixel_unshuffle": 1,
+            "aten::gelu": 36,
+            "aten::sigmoid": 2,
+            "aten::mul": 15,
+            "aten::pixel_shuffle": 4,
+            "aten::softmax": 1,
+            "aten::silu": 1,
+            "aten::empty_like": 4,
+            "aten::scatter_": 4
+          },
+          "status": "partial count; fallback diagnostic only"
+        }
+      ],
+      "formal_params_from_checkpoint_schema": 2269591
+    },
+    "T3": {
+      "class": "TopoRouteBlock",
+      "params_actual_backend": 3185031,
+      "backends": {
+        "stage4": [
+          "fallback"
+        ]
+      },
+      "fuse": [
+        960,
+        320
+      ],
+      "stage4_modules": {
+        "": "TopoRouteBlock",
+        "local": "Sequential",
+        "local.0": "DWConvBlock",
+        "local.0.block": "Sequential",
+        "local.0.block.0": "ConvBNAct",
+        "local.0.block.0.block": "Sequential",
+        "local.0.block.0.block.0": "Conv2d",
+        "local.0.block.0.block.1": "BatchNorm2d",
+        "local.0.block.0.block.2": "GELU",
+        "local.0.block.1": "ConvBNAct",
+        "local.0.block.1.block": "Sequential",
+        "local.0.block.1.block.0": "Conv2d",
+        "local.0.block.1.block.1": "BatchNorm2d",
+        "local.0.block.1.block.2": "GELU",
+        "local.1": "StripConvBlock",
+        "local.1.horizontal": "Conv2d",
+        "local.1.vertical": "Conv2d",
+        "local.1.mix": "ConvBNAct",
+        "local.1.mix.block": "Sequential",
+        "local.1.mix.block.0": "Conv2d",
+        "local.1.mix.block.1": "BatchNorm2d",
+        "local.1.mix.block.2": "GELU",
+        "route_mamba": "DirectionPartitionedSharedMamba",
+        "route_mamba.route_head": "Sequential",
+        "route_mamba.route_head.0": "Conv2d",
+        "route_mamba.route_head.1": "BatchNorm2d",
+        "route_mamba.route_head.2": "GELU",
+        "route_mamba.route_head.3": "Conv2d",
+        "route_mamba.pre_mix": "Sequential",
+        "route_mamba.pre_mix.0": "Conv2d",
+        "route_mamba.pre_mix.1": "BatchNorm2d",
+        "route_mamba.pre_mix.2": "GELU",
+        "route_mamba.scans": "ModuleDict",
+        "route_mamba.scans.horizontal": "DirectionalGridPermutation",
+        "route_mamba.scans.vertical": "DirectionalGridPermutation",
+        "route_mamba.scans.diagonal": "DirectionalGridPermutation",
+        "route_mamba.scans.anti_diagonal": "DirectionalGridPermutation",
+        "route_mamba.shared_mamba": "SequenceMambaCore",
+        "route_mamba.shared_mamba.norm": "LayerNorm",
+        "route_mamba.shared_mamba.core": "_FallbackSequenceBlock",
+        "route_mamba.shared_mamba.core.in_proj": "Linear",
+        "route_mamba.shared_mamba.core.dwconv": "Conv1d",
+        "route_mamba.shared_mamba.core.out_proj": "Linear",
+        "route_mamba.shared_mamba.core.act": "SiLU",
+        "route_mamba.shared_mamba.out_norm": "LayerNorm",
+        "route_mamba.output_mix": "Sequential",
+        "route_mamba.output_mix.0": "Conv2d",
+        "route_mamba.output_mix.1": "BatchNorm2d",
+        "route_mamba.output_mix.2": "GELU",
+        "global_branch": "TransformerGlobalBlock",
+        "global_branch.attn": "LightweightSelfAttention",
+        "global_branch.attn.norm": "GroupNorm",
+        "global_branch.attn.qkv": "Conv2d",
+        "global_branch.attn.proj": "Conv2d",
+        "global_branch.norm": "GroupNorm",
+        "global_branch.mlp": "Sequential",
+        "global_branch.mlp.0": "Conv2d",
+        "global_branch.mlp.1": "GELU",
+        "global_branch.mlp.2": "Conv2d",
+        "fuse": "ConvBNAct",
+        "fuse.block": "Sequential",
+        "fuse.block.0": "Conv2d",
+        "fuse.block.1": "BatchNorm2d",
+        "fuse.block.2": "GELU",
+        "refine": "DWConvBlock",
+        "refine.block": "Sequential",
+        "refine.block.0": "ConvBNAct",
+        "refine.block.0.block": "Sequential",
+        "refine.block.0.block.0": "Conv2d",
+        "refine.block.0.block.1": "BatchNorm2d",
+        "refine.block.0.block.2": "GELU",
+        "refine.block.1": "ConvBNAct",
+        "refine.block.1.block": "Sequential",
+        "refine.block.1.block.0": "Conv2d",
+        "refine.block.1.block.1": "BatchNorm2d",
+        "refine.block.1.block.2": "GELU"
+      },
+      "forward_backward": [
+        {
+          "input": [
+            1,
+            3,
+            352,
+            640
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "edge": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "reliability": [
+              1,
+              1,
+              352,
+              640
+            ],
+            "route_s4": [
+              1,
+              4,
+              44,
+              80
+            ]
+          },
+          "packed_core_inputs": [
+            [
+              4,
+              3520,
+              80
+            ]
+          ],
+          "all_gradients_finite": true
+        },
+        {
+          "input": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "outputs": {
+            "mask": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "edge": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "reliability": [
+              1,
+              1,
+              512,
+              512
+            ],
+            "route_s4": [
+              1,
+              4,
+              64,
+              64
+            ]
+          },
+          "packed_core_inputs": [
+            [
+              4,
+              4096,
+              80
+            ]
+          ],
+          "all_gradients_finite": true
+        }
+      ],
+      "checkpoint_schema": {
+        "path": "./runs/paper/dependency_aware_ablation_strict_v2/crack500/M3_FrameworkOn_DPSMOn_StructSupOff/20260830-192224/best_structural_score.pth",
+        "non_backend_keys_shapes": "PASS",
+        "full_schema_equal": false
+      },
+      "formal_params_from_checkpoint_schema": 3193751
+    }
+  },
+  "formal_parameter_evidence": {
+    "checkpoint": "./runs/paper/dependency_aware_ablation_strict_v2/crack500/M3_FrameworkOn_DPSMOn_StructSupOff/20260830-192224/best_structural_score.pth",
+    "desktop_core_params": 40080,
+    "checkpoint_core_params": 48800,
+    "delta": 8720,
+    "method": "replace core parameter counts only; non-backend schema equality checked above"
+  },
+  "invalid_variant_guards": [
+    {
+      "tag": "T0",
+      "change": {
+        "use_direction_partitioned_shared_mamba": true
+      },
+      "status": "rejected"
+    },
+    {
+      "tag": "T2",
+      "change": {
+        "use_topology_matched_no_dpsm_stage4": true
+      },
+      "status": "rejected"
+    },
+    {
+      "tag": "T2",
+      "change": {
+        "transformer_stages": [
+          4
+        ],
+        "use_transformer": true
+      },
+      "status": "rejected"
+    },
+    {
+      "tag": "T2",
+      "change": {
+        "stage4_hybrid_order": "dpsm_then_transformer"
+      },
+      "status": "rejected"
+    },
+    {
+      "tag": "T2",
+      "change": {
+        "dpsm_route_mode": "uniform"
+      },
+      "status": "rejected"
+    }
+  ],
+  "retained_initialization": {
+    "T0": {
+      "reference": "T1",
+      "identical_tensors": 230
+    },
+    "T2": {
+      "reference": "T3",
+      "identical_tensors": 260
+    }
+  },
+  "legacy_before_after": {
+    "T1": "all state_dict keys, shapes and initialized values identical",
+    "T3": "all state_dict keys, shapes and initialized values identical"
+  }
+}

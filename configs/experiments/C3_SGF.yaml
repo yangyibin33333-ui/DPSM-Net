@@ -1,0 +1,49 @@
+model:
+  name: DEMambaNet
+  in_channels: 3
+  num_classes: 1
+  base_channels: 32
+  use_mamba_ssm: true
+  mamba_stages: [3, 4]
+  transformer_stages: [4]
+  route_bins: 4
+  use_frequency_gate: false
+  use_semantic_skip_gate: true
+
+data:
+  data_root: ./DeepCrack
+  img_size: [512, 512]
+  threshold: 127
+  target_dir_name: targets
+
+train:
+  epochs: 200
+  batch_size: 8
+  lr: 0.0001
+  weight_decay: 0.0001
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  amp: true
+  amp_dtype: fp16
+  cudnn_benchmark: true
+  torch_compile: false
+  fused_adamw: true
+  val_interval: 1
+
+loss:
+  lambda_edge: 0.3
+  lambda_tangent: 0.2
+  scnp_weight: 0.2
+  scnp_warmup_epochs: 10
+  scnp_kernel_size: 3
+
+evaluation:
+  selection_metric: structural_score
+  structural_score_weights:
+    f1: 0.5
+    cldice: 0.3
+    boundary_f1: 0.2
+
+save:
+  save_dir: ./runs/demambanet

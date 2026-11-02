@@ -1,0 +1,3 @@
+model: B0
+common: common.yaml
+seed: 42

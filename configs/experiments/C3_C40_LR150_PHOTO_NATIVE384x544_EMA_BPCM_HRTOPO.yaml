@@ -1,0 +1,82 @@
+model:
+  name: HRTopoMambaNet
+  in_channels: 3
+  num_classes: 1
+  base_channels: 40
+  use_mamba_ssm: true
+  mamba_stages: [3, 4]
+  transformer_stages: [4]
+  route_bins: 4
+  use_frequency_gate: false
+  use_semantic_skip_gate: false
+  use_detail_residual_gate: false
+  use_structure_harmonic_fusion: false
+  use_boundary_logit_calibration: false
+  use_local_route_gate: false
+  use_deep_identity_decay: false
+  deep_identity_scales:
+    stage3: 1.0
+    stage4: 1.0
+  hr_topo:
+    detail_to_semantic: true
+    semantic_to_detail_from_stage3: true
+    semantic_to_detail_from_stage4: true
+    zero_initialized_residual_scales: true
+
+data:
+  data_root: ./DeepCrack
+  img_size: [384, 544]
+  threshold: 127
+  target_dir_name: targets
+  allow_quarter_turns: false
+  photometric_augment:
+    enabled: true
+    probability: 0.5
+    brightness: 0.12
+    contrast: 0.12
+    gamma_range: [0.9, 1.1]
+
+train:
+  epochs: 200
+  batch_size: 8
+  lr: 0.00015
+  weight_decay: 0.0001
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  amp: true
+  amp_dtype: fp16
+  cudnn_benchmark: true
+  torch_compile: false
+  fused_adamw: true
+  exclude_norm_bias_from_weight_decay: false
+  lr_scheduler: cosine
+  min_lr: 0.0
+  poly_power: 0.9
+  use_model_ema: true
+  model_ema_decay: 0.999
+  val_interval: 1
+
+loss:
+  lambda_edge: 0.3
+  lambda_tangent: 0.2
+  scnp_weight: 0.2
+  scnp_warmup_epochs: 10
+  scnp_kernel_size: 3
+  mask_pos_weight: 1.0
+  lambda_tnhnc: 0.0
+  lambda_bpcm: 0.025
+  bpcm_start_epoch: 60
+  bpcm_ramp_epochs: 40
+  bpcm_margin: 0.5
+  bpcm_neg_temperature: 0.5
+
+evaluation:
+  selection_metric: structural_score
+  structural_score_weights:
+    f1: 0.5
+    cldice: 0.3
+    boundary_f1: 0.2
+
+save:
+  save_dir: ./runs/pilot/C3_C40_LR150_PHOTO_NATIVE384x544_EMA_BPCM_HRTOPO

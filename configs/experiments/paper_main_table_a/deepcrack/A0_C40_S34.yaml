@@ -1,0 +1,186 @@
+# Frozen Auto Protocol V2 with pre-registered Paper Main Table A0 structure.
+model:
+  name: DEMambaNet
+  in_channels: 3
+  num_classes: 1
+  base_channels: 40
+  use_mamba_ssm: true
+  mamba_stages: [3, 4]
+  transformer_stages: [4]
+  route_bins: 4
+  use_transformer: true
+  stage3_mamba_window_size: null
+  stage3_bidirectional_mamba: false
+  stage3_active_mamba_directions: null
+  stage4_active_mamba_directions: null
+  stage4_mamba_spatial_reduction: 1
+  stage4_mamba_channels: null
+  use_sdf_head: false
+  use_edge_mask_consistency_refiner: false
+  use_retinex_directional_valley_prior: false
+  use_route_guided_directional_refiner: false
+  use_route_guided_anisotropic_diffusion: false
+  use_density_balanced_prototype_context: false
+  use_local_semantic_continuity_calibrator: false
+  use_local_pixel_reassembly_residual: false
+  use_local_spectral_confidence_rejector: false
+  use_high_resolution_spectral_detail_gate: false
+  return_training_mask_feature: false
+  use_semantic_conditioned_local_kernel_residual: false
+  use_residual_branch_competition_fusion: false
+  use_detail_preserving_early_rebase: false
+  early_detail_channels: 16
+  use_rsdm_stage1: false
+  use_direction_partitioned_shared_mamba: false
+  stage4_direction_group_channels: 80
+  use_low_resolution_subpixel_separable_concat_fusion: false
+  use_common_private_direction_partitioned_shared_mamba: false
+  use_full_width_residual_mask_head: false
+  use_difference_aware_up1_fusion: false
+  use_depthwise_separable_mask_head: false
+  use_narrow_transport_decoder: false
+  use_partial_narrow_transport_decoder: false
+  use_low_resolution_subpixel_additive_fusion: false
+  use_frequency_gate: false
+  use_semantic_skip_gate: false
+  use_detail_residual_gate: false
+  use_structure_harmonic_fusion: false
+  use_boundary_logit_calibration: false
+  use_deep_supervision: false
+  use_subpixel_phase_consistency_refiner: false
+  use_haar_topology_preserving_rebase: false
+  use_narrow_dual_resolution_stage1: false
+  use_full_resolution_joint_exchange: false
+  use_early_serpentine_connectivity_ssm: false
+  use_partial_full_resolution_stage1: false
+  use_multiscale_directional_reallocation: false
+  use_local_route_gate: false
+  use_deep_identity_decay: false
+  deep_identity_scales:
+    stage3: 1.0
+    stage4: 1.0
+
+data:
+  data_root: ./DeepCrack
+  img_size: null
+  threshold: 127
+  target_dir_name: targets
+  allow_quarter_turns: false
+  photometric_augment:
+    enabled: true
+    probability: 0.5
+    brightness: 0.12
+    contrast: 0.12
+    gamma_range: [0.9, 1.1]
+
+train:
+  epochs: 200
+  batch_size: 8
+  lr: 0.00015
+  weight_decay: 0.0001
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  amp: true
+  amp_dtype: fp16
+  cudnn_benchmark: true
+  torch_compile: false
+  fused_adamw: true
+  exclude_norm_bias_from_weight_decay: false
+  lr_scheduler: cosine
+  min_lr: 0.0
+  poly_power: 0.9
+  use_model_ema: true
+  model_ema_decay: 0.999
+  val_interval: 1
+
+loss:
+  lambda_cfps: 0.0
+  lambda_edge: 0.3
+  lambda_tangent: 0.2
+  scnp_weight: 0.2
+  scnp_warmup_epochs: 10
+  scnp_kernel_size: 3
+  mask_pos_weight: auto
+  lambda_tnhnc: 0.0
+  lambda_bpcm: 0.025
+  bpcm_start_epoch: 60
+  bpcm_ramp_epochs: 40
+  bpcm_margin: 0.5
+  bpcm_neg_temperature: 0.5
+
+evaluation:
+  selection_metric: structural_score
+  structural_score_weights:
+    f1: 0.5
+    cldice: 0.3
+    boundary_f1: 0.2
+
+distillation:
+  enabled: false
+
+save:
+  save_dir: runs/paper/main_table_a/deepcrack/A0_C40_S34
+
+auto_protocol:
+  version: 2
+  enabled: true
+  dry_run: false
+  native_input:
+    enabled: true
+    align_multiple: 32
+    max_pixels: 409600
+    size_statistic: mode
+  regimes:
+    - name: tiny
+      max_train_samples: 127
+      effective_batch_size: 2
+      target_epochs: 200
+      mask_pos_weight_mode: inverse_prevalence
+    - name: small
+      max_train_samples: 511
+      effective_batch_size: 8
+      target_epochs: 200
+      mask_pos_weight_mode: fixed
+      mask_pos_weight: 1.0
+    - name: medium
+      max_train_samples: 767
+      effective_batch_size: 4
+      target_epochs: 100
+      mask_pos_weight_mode: fixed
+      mask_pos_weight: 1.0
+    - name: large
+      max_train_samples: 1535
+      effective_batch_size: 8
+      target_epochs: 75
+      mask_pos_weight_mode: fixed
+      mask_pos_weight: 1.0
+    - name: xlarge
+      max_train_samples: null
+      effective_batch_size: 8
+      target_epochs: 64
+      mask_pos_weight_mode: fixed
+      mask_pos_weight: 1.0
+  batch:
+    micro_batch: auto
+    max_memory_fraction: 0.85
+  foreground_balance:
+    min_weight: 1.0
+    max_weight: 50.0
+    fail_on_empty_dataset: true
+    fail_on_unreadable_mask: true
+    fail_on_stem_mismatch: true
+    fail_if_foreground_fraction_above: 0.5
+  loss_phases:
+    use_update_clock: true
+    scnp_warmup_ratio: 0.05
+    bpcm_start_ratio: 0.30
+    bpcm_ramp_ratio: 0.20
+  validation:
+    interval_updates: 400
+  early_stopping:
+    enabled: true
+    selection_metric: structural_score
+    min_training_ratio: 0.55
+    patience_ratio: 0.15
+    min_delta: 0.0005

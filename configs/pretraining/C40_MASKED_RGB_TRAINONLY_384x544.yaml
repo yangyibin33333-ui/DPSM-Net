@@ -1,0 +1,48 @@
+model:
+  name: DEMambaNet
+  in_channels: 3
+  num_classes: 1
+  base_channels: 40
+  use_mamba_ssm: true
+  mamba_stages: [3, 4]
+  transformer_stages: [4]
+  route_bins: 4
+  use_frequency_gate: false
+  use_semantic_skip_gate: false
+  use_detail_residual_gate: false
+  use_structure_harmonic_fusion: false
+  use_boundary_logit_calibration: false
+  use_local_route_gate: false
+  use_deep_identity_decay: false
+  deep_identity_scales:
+    stage3: 1.0
+    stage4: 1.0
+
+data:
+  data_root: ./DeepCrack
+  split: train
+  img_size: [384, 544]
+
+masking:
+  patch_size: 16
+  mask_ratio: 0.60
+
+objective: masked_smooth_l1_rgb_reconstruction
+
+train:
+  seed: 42
+  epochs: 100
+  batch_size: 8
+  lr: 0.00015
+  weight_decay: 0.0001
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  amp: true
+  amp_dtype: fp16
+  fused_adamw: true
+  lr_scheduler: cosine
+  min_lr: 0.0
+
+save:
+  save_dir: ./runs/pretrain/C40_MASKED_RGB_TRAINONLY_384x544

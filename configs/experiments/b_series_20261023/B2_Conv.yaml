@@ -1,0 +1,3 @@
+model: B2-Conv
+common: common.yaml
+seed: 42

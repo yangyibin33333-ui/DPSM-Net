@@ -1,0 +1,45 @@
+{
+  "datasets": {
+    "DeepCrack": {
+      "root": "./DeepCrack", "split": "test", "image_dir": "test/images", "mask_dir": "test/masks",
+      "foreground": {"mode": "threshold", "evaluation_threshold": 127},
+      "source_group_regex": "^(test_[0-9]+)",
+      "test_provenance_note": "Evaluation uses root/test; verify this inventory against the final evaluation archive before confirmation.",
+      "evaluation_evidence": [{"base": "repo", "path": "test.py"}, {"base": "repo", "path": "train.py"}, {"base": "repo", "path": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md"}]
+    },
+    "CamCrack789": {
+      "root": "./CamCrack789", "split": "test", "image_dir": "test/images", "mask_dir": "test/masks",
+      "foreground": {"mode": "threshold", "evaluation_threshold": 127},
+      "test_provenance_note": "Evaluation uses root/test; verify inventory against the final evaluation archive.",
+      "evaluation_evidence": [{"base": "repo", "path": "test.py"}, {"base": "repo", "path": "runs/pilot/auto_protocol_v2/C40_DPSM80_CamCrack789_AUTO_PROTOCOL_V2/20260827-073748/config.yaml"}, {"base": "repo", "path": "runs/pilot/auto_protocol_v2/C40_DPSM80_CamCrack789_AUTO_PROTOCOL_V2/20260827-073748/train.log"}]
+    },
+    "CrackMap": {
+      "root": "./CrackMap", "split": "test", "image_dir": "test/images", "mask_dir": "test/masks",
+      "foreground": {"mode": "threshold", "evaluation_threshold": 127},
+      "source_group_regex": "^(.*?)(?: \\([0-9]+\\))?$",
+      "test_provenance_note": "Use the existing test view, not a recreated random split. Attach original test.txt when available.",
+      "evaluation_evidence": [{"base": "repo", "path": "test.py"}, {"base": "repo", "path": "runs/pilot/auto_protocol_v2/C40_DPSM80_CrackMap_AUTO_PROTOCOL_V2/20260827-072825/config.yaml"}, {"base": "repo", "path": "runs/pilot/auto_protocol_v2/C40_DPSM80_CrackMap_AUTO_PROTOCOL_V2/20260827-072825/train.log"}]
+    },
+    "Crack500": {
+      "root": "./Crack500", "split": "test", "image_dir": "test/images", "mask_dir": "test/masks",
+      "foreground": {"mode": "threshold", "evaluation_threshold": 127},
+      "source_group_regex": "^(test_[0-9]+_[0-9]+)",
+      "test_provenance_note": "Use original test view and original test.txt if available; final checkpoint selection is unrelated to sample selection.",
+      "evaluation_evidence": [{"base": "repo", "path": "test.py"}, {"base": "repo", "path": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md"}]
+    },
+    "CFD": {
+      "root": "./CFD", "split": "test", "image_dir": "test/images", "mask_dir": "test/masks",
+      "foreground": {"mode": "binary", "evaluation_threshold": 127},
+      "test_provenance_note": "User supplied CFD/test with 23 image/GT pairs. Verify against the original server evaluation inventory; never regenerate the split or substitute val.",
+      "evaluation_evidence": [{"base": "repo", "path": "test.py"}, {"base": "repo", "path": "runs/pilot/auto_protocol_v2/C40_DPSM80_CFD_AUTO_PROTOCOL_V2/20260827-071420/config.yaml"}, {"base": "repo", "path": "runs/pilot/auto_protocol_v2/C40_DPSM80_CFD_AUTO_PROTOCOL_V2/20260827-071420/train.log"}]
+    },
+    "TUT": {
+      "root": "./TUT", "split": "test", "image_dir": "test/images", "mask_dir": "test/masks",
+      "split_source": {"kind": "source_order_tsv", "path": "test/source_order.tsv"},
+      "source_group_regex": "^([^_]+)",
+      "foreground": {"mode": "threshold", "evaluation_threshold": 127},
+      "test_provenance_note": "Existing official test view; source_order.tsv identifies original test_img/test_lab IDs. Prefix diversity is a heuristic, not a verified material label.",
+      "evaluation_evidence": [{"base": "repo", "path": "test.py"}, {"base": "repo", "path": "TUT/README.md"}, {"base": "repo", "path": "DPSM_CURRENT_EXPERIMENT_DATA_CHECKLIST_2026-09-01.md"}]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+torch>=2.1
+torchvision>=0.16
+numpy>=1.23
+Pillow>=9.5
+PyYAML>=6.0
+tqdm>=4.65
+scikit-image>=0.21
+mamba-ssm>=2.2.0; platform_system != "Windows"

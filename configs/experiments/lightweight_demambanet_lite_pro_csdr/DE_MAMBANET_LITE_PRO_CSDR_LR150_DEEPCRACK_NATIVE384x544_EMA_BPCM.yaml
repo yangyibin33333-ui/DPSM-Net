@@ -1,0 +1,74 @@
+# Independent CSDR experiment; data, training, losses, and evaluation match LitePro.
+model:
+  name: DEMambaNetLiteProCSDR
+  in_channels: 3
+  num_classes: 1
+  encoder_widths: [48, 96, 192, 256]
+  encoder_depths: [2, 2, 4, 2]
+  decoder_channels: 96
+  detail_channels: 48
+  final_refine_channels: 64
+  directional_kernel: 13
+  expansion_ratio: 2.0
+  stage3_mamba_channels: 112
+  stage4_mamba_channels: 144
+  use_mamba_ssm: true
+  drop_path_rate: 0.05
+
+data:
+  data_root: ./DeepCrack
+  img_size: [384, 544]
+  threshold: 127
+  target_dir_name: targets
+  allow_quarter_turns: false
+  photometric_augment:
+    enabled: true
+    probability: 0.5
+    brightness: 0.12
+    contrast: 0.12
+    gamma_range: [0.9, 1.1]
+
+train:
+  epochs: 200
+  batch_size: 8
+  lr: 0.00015
+  weight_decay: 0.0001
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  amp: true
+  amp_dtype: fp16
+  cudnn_benchmark: true
+  torch_compile: false
+  fused_adamw: true
+  exclude_norm_bias_from_weight_decay: false
+  lr_scheduler: cosine
+  min_lr: 0.0
+  poly_power: 0.9
+  use_model_ema: true
+  model_ema_decay: 0.999
+  val_interval: 1
+
+loss:
+  lambda_edge: 0.3
+  lambda_tangent: 0.2
+  scnp_weight: 0.2
+  scnp_warmup_epochs: 10
+  scnp_kernel_size: 3
+  mask_pos_weight: 1.0
+  lambda_tnhnc: 0.0
+  lambda_bpcm: 0.025
+  bpcm_start_epoch: 60
+  bpcm_ramp_epochs: 40
+  bpcm_margin: 0.5
+  bpcm_neg_temperature: 0.5
+
+evaluation:
+  selection_metric: structural_score
+  structural_score_weights:
+    f1: 0.5
+    cldice: 0.3
+    boundary_f1: 0.2
+
+save:
+  save_dir: ./runs/pilot/lightweight_demambanet_lite_pro_csdr/DE_MAMBANET_LITE_PRO_CSDR_LR150_DEEPCRACK_NATIVE384x544_EMA_BPCM

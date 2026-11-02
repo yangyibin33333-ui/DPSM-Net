@@ -1,0 +1,190 @@
+study: b_series_20261023
+models:
+- B0
+- B1
+- B2
+- B2-Conv
+seed: 42
+formal_reference: configs\experiments\auto_protocol\C40_DPSM80_AUTO_PROTOCOL_V2.yaml
+formal_reference_sha256: 935c75aa6cdf01d7c85daf40cd5be80a6e3108161b5fa834bcf65e7667f1b237
+data:
+  root: DeepCrack
+  manifest: configs/experiments/b_series_20261023/manifest.json
+  input_hw:
+  - 384
+  - 544
+  counts:
+    train: 368
+    val: 53
+    test: 106
+  photometric_augment:
+    enabled: true
+    probability: 0.5
+    brightness: 0.12
+    contrast: 0.12
+    gamma_range:
+    - 0.9
+    - 1.1
+  mask_threshold: 127
+  normalization: ImageNet
+  letterbox: true
+  allow_quarter_turns: false
+training:
+  lr: 0.00015
+  weight_decay: 0.0001
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  fused: true
+  exclude_norm_bias_from_weight_decay: false
+  max_epochs: 200
+  effective_batch: 8
+  micro_batch: 8
+  accumulation_steps: 1
+  steps_per_epoch: 46
+  target_updates: 9200
+  amp: true
+  amp_dtype: fp16
+  grad_scaler:
+    init_scale: 65536.0
+    growth_factor: 2.0
+    backoff_factor: 0.5
+    growth_interval: 2000
+  ema: 0.999
+  scheduler: cosine
+  eta_min: 0.0
+  validation_interval_updates: 138
+  early_stopping:
+    min_update: 5060
+    patience_updates: 1380
+    min_delta: 0.0005
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  max_memory_fraction: 0.85
+  cudnn_benchmark: true
+loss:
+  name: original BCEDiceLoss
+  bce_coefficient: 1
+  dice_coefficient: 1
+  pos_weight: 1.0
+  source: losses/loss.py::DiceLoss,BCEDiceLoss
+evaluation:
+  weights:
+    F1: 0.5
+    clDice: 0.3
+    BoundaryF1: 0.2
+  test_enabled: false
+  threshold: 0.5
+  comparison: '>'
+  thin_radius_px: 2.0
+  thin_min_points: 20
+  thin_min_missed: 10
+  thin_trigger_fraction: 0.15
+  far_gt_distance_px: 3.0
+  far_trigger_pixels: 25
+  far_trigger_prediction_fraction: 0.1
+execution:
+  models:
+  - B0
+  - B1
+  - B2
+  - B2-Conv
+  report_every_epochs: 1
+  cpu_threads: 4
+  output_root: runs/pilot/b_series_20261023
+  all_models_same_micro_batch: true
+resolved_formal_auto_protocol:
+  train_samples: 368
+  native_size_distribution:
+    384x544: 334
+    544x384: 34
+  selected_img_size:
+  - 384
+  - 544
+  effective_batch_size: 8
+  optimizer_steps_per_epoch: 46
+  target_updates: 9200
+  resolved_epochs: 200
+  scnp_warmup_updates: 460
+  bpcm_start_update: 2760
+  bpcm_ramp_updates: 1840
+  configured_validation_interval_updates: 400
+  resolved_validation_interval_updates: 138
+  approximate_validation_interval_epochs: 3.0
+  min_early_stop_update: 5060
+  patience_updates: 1380
+  stop_reason: null
+  best_checkpoint_score: null
+  best_checkpoint_update: null
+  best_checkpoint_epoch: null
+  absolute_best_score: null
+  absolute_best_update: null
+  absolute_best_checkpoint: null
+  significant_best_checkpoint: null
+  significant_best_score: null
+  last_significant_improvement_update: null
+  final_checkpoint_type: null
+  final_checkpoint_path: null
+  final_checkpoint_score: null
+  final_checkpoint_update: null
+  final_global_update: 0
+  dry_run: false
+  dry_run_optimizer_updates: 0
+  validation_calls: 0
+  test_calls: 0
+  protocol_version: 2
+  selected_regime: small
+  planned_sample_exposures: 73600
+  approximate_dataset_passes: 200.0
+  foreground_audit: &id001
+    train_mask_count: 368
+    positive_pixels: 2679981
+    total_pixels: 76873728
+    foreground_fraction: 0.03486211830392823
+    negative_positive_ratio: 27.684430225438167
+    per_image_foreground_fraction_mean: 0.03486211830392823
+    per_image_foreground_fraction_median: 0.02707088694852941
+    per_image_foreground_fraction_min: 0.0026185278799019606
+    per_image_foreground_fraction_max: 0.19935278799019607
+    empty_mask_count: 0
+    unreadable_mask_count: 0
+    stem_mismatch_count: 0
+    dataset_fingerprint: de32195c8aed7058c20f822de4e4b813816e357e20febac38802645933fcea74
+    raw_mask_pos_weight: 1.0
+    resolved_mask_pos_weight: 1.0
+    mask_pos_weight_clipped: false
+    mask_pos_weight_source: fixed
+  overrides:
+  - cli.data_root
+  selected_regime_condition:
+    max_train_samples: 511
+    source: train_samples
+  target_epochs: 200
+  minimum_early_stop_sample_exposures: 40480
+  patience_sample_exposures: 11040
+  resolved_mask_pos_weight: 1.0
+  mask_pos_weight_source: fixed
+  resume_identity:
+    protocol_version: 2
+    selected_regime: small
+    dataset_fingerprint: de32195c8aed7058c20f822de4e4b813816e357e20febac38802645933fcea74
+    train_samples: 368
+    selected_img_size:
+    - 384
+    - 544
+    foreground_audit: *id001
+    mask_pos_weight: 1.0
+    effective_batch_size: 8
+    target_epochs: 200
+    target_updates: 9200
+    loss_phases:
+      use_update_clock: true
+      scnp_warmup_updates: 460
+      bpcm_start_update: 2760
+      bpcm_ramp_updates: 1840
+    validation_interval_updates: 138
+    min_early_stop_update: 5060
+    patience_updates: 1380
+  validation_interval_updates: 138

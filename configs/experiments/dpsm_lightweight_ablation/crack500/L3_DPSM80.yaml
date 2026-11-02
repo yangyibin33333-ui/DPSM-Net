@@ -1,0 +1,24 @@
+# L3: frozen DPSM80. Semantically equivalent to M3 except save/comment.
+model: {name: DEMambaNet, in_channels: 3, num_classes: 1, base_channels: 40, use_mamba_ssm: true, mamba_stages: [4], transformer_stages: [4], route_bins: 4, use_transformer: true, use_detail_preserving_early_rebase: true, early_detail_channels: 16, use_rsdm_stage1: true, use_low_resolution_subpixel_separable_concat_fusion: true, use_topology_matched_no_dpsm_stage4: false, use_direction_partitioned_shared_mamba: true, stage4_direction_group_channels: 80, stage4_hybrid_order: parallel, stage4_mamba_spatial_reduction: 1, stage4_mamba_channels: null, stage3_mamba_window_size: null, stage3_bidirectional_mamba: false, stage3_active_mamba_directions: null, stage4_active_mamba_directions: null}
+data: {data_root: ./Crack500, img_size: null, threshold: 127, target_dir_name: targets, allow_quarter_turns: false, photometric_augment: {enabled: true, probability: 0.5, brightness: 0.12, contrast: 0.12, gamma_range: [0.9, 1.1]}}
+train: {epochs: 200, batch_size: 8, lr: 0.00015, weight_decay: 0.0001, num_workers: 4, persistent_workers: true, prefetch_factor: 2, amp: true, amp_dtype: fp16, cudnn_benchmark: true, torch_compile: false, fused_adamw: true, exclude_norm_bias_from_weight_decay: false, lr_scheduler: cosine, min_lr: 0.0, poly_power: 0.9, use_model_ema: true, model_ema_decay: 0.999, val_interval: 1}
+loss: {lambda_cfps: 0.0, lambda_edge: 0.3, lambda_tangent: 0.0, scnp_weight: 0.2, scnp_warmup_epochs: 10, scnp_kernel_size: 3, mask_pos_weight: auto, lambda_tnhnc: 0.0, lambda_bpcm: 0.0, bpcm_start_epoch: 60, bpcm_ramp_epochs: 40, bpcm_margin: 0.5, bpcm_neg_temperature: 0.5}
+evaluation: {selection_metric: structural_score, structural_score_weights: {f1: 0.5, cldice: 0.3, boundary_f1: 0.2}}
+distillation: {enabled: false}
+save: {save_dir: runs/paper/dpsm_lightweight_ablation/crack500/L3_DPSM80}
+auto_protocol:
+  version: 2
+  enabled: true
+  dry_run: false
+  native_input: {enabled: true, align_multiple: 32, max_pixels: 409600, size_statistic: mode}
+  regimes:
+    - {name: tiny, max_train_samples: 127, effective_batch_size: 2, target_epochs: 200, mask_pos_weight_mode: inverse_prevalence}
+    - {name: small, max_train_samples: 511, effective_batch_size: 8, target_epochs: 200, mask_pos_weight_mode: fixed, mask_pos_weight: 1.0}
+    - {name: medium, max_train_samples: 767, effective_batch_size: 4, target_epochs: 100, mask_pos_weight_mode: fixed, mask_pos_weight: 1.0}
+    - {name: large, max_train_samples: 1535, effective_batch_size: 8, target_epochs: 75, mask_pos_weight_mode: fixed, mask_pos_weight: 1.0}
+    - {name: xlarge, max_train_samples: null, effective_batch_size: 8, target_epochs: 64, mask_pos_weight_mode: fixed, mask_pos_weight: 1.0}
+  batch: {micro_batch: auto, max_memory_fraction: 0.85}
+  foreground_balance: {min_weight: 1.0, max_weight: 50.0, fail_on_empty_dataset: true, fail_on_unreadable_mask: true, fail_on_stem_mismatch: true, fail_if_foreground_fraction_above: 0.5}
+  loss_phases: {use_update_clock: true, scnp_warmup_ratio: 0.05, bpcm_start_ratio: 0.30, bpcm_ramp_ratio: 0.20}
+  validation: {interval_updates: 400}
+  early_stopping: {enabled: true, selection_metric: structural_score, min_training_ratio: 0.55, patience_ratio: 0.15, min_delta: 0.0005}
